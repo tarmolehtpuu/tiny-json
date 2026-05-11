@@ -1,4 +1,4 @@
-name: Build
+name: Rekease
 
 on:
   push:
@@ -36,7 +36,6 @@ jobs:
       - name: Detect version
         run: |
           echo "VERSION=$(cat VERSION | xargs)" >> $GITHUB_ENV
-          echo "Detected version: v{$VERSION}"
 
       - name: Release
         run: |
