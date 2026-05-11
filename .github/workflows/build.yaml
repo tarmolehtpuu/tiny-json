@@ -16,7 +16,7 @@ env:
 permissions:
   checks: write
   contents: read
-  pull-requests: read
+  pull-requests: write
 
 jobs:
   build:
