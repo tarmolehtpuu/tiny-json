@@ -33,6 +33,12 @@ jobs:
       - name: Build
         run: ./gradlew check jar
 
+      - name: Update badges
+        uses: gaelgirodon/ci-badges-action@v1
+        with:
+          gist-id: 0c07bae091e8ac26aa21067c52892d66
+          token: ${{ secrets.GIST_TOKEN }}
+
       - name: Detect version
         run: |
           echo "VERSION=$(cat VERSION | xargs)" >> $GITHUB_ENV
