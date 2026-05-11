@@ -82,20 +82,27 @@ public final class JsonObject extends JsonValue {
     }
 
     public void put(String key, Set<?> value) {
-        var data = new JsonArray();
-        for (var item : value) {
-            data.add(new JsonString(value.toString()));
-        }
-
-        put(key, data);
+        put(key, new ArrayList<Object>(value));
     }
 
     public void put(String key, List<?> value) {
         var data = new JsonArray();
         for (var item : value) {
-            data.add(new JsonString(value.toString()));
+            if (item == null) {
+                data.add(JsonNull.INSTANCE);
+            }
+            if (item instanceof Number) {
+                data.add(new JsonNumber(String.valueOf(item)));
+            } else if (item instanceof Boolean) {
+                if (String.valueOf(item).equals("true")) {
+                    data.add(JsonBoolean.TRUE);
+                } else {
+                    data.add(JsonBoolean.FALSE);
+                }
+            } else {
+                data.add(new JsonString(String.valueOf(item)));
+            }
         }
-
         put(key, data);
     }
 
