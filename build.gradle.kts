@@ -1,6 +1,7 @@
 plugins {
     java
     jacoco
+    `maven-publish`
 }
 
 group = "ee.moo"
@@ -64,5 +65,23 @@ tasks.jar {
             "Bundle-Copyright" to "Copyright 2026 Tarmo Lehtpuu",
             "Bundle-License" to "http://www.apache.org/licenses/LICENSE-2.0"
         )
+    }
+}
+
+publishing {
+    repositories {
+        maven  {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/tarmolehtpuu/tiny-json")
+            credentials {
+                username = project.findProperty("gpr.username") as String? ?: System.getenv("GPR_USERNAME")
+                password = project.findProperty("gpr.password") as String? ?: System.getenv("GPR_PASSWORD")
+            }
+        }
+        publications {
+            register<MavenPublication>("gpr") {
+                from(components["java"])
+            }
+        }
     }
 }
