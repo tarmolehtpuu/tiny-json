@@ -1,4 +1,5 @@
-# tiny-json
+# tiny-json ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Ftarmolehtpuu%2F0c07bae091e8ac26aa21067c52892d66%2Fraw%2Fec90481c8c882fda64a36f968b825eaca1297cf8%2Ftiny-json-junit-tests.json) ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Ftarmolehtpuu%2F0c07bae091e8ac26aa21067c52892d66%2Fraw%2Fec90481c8c882fda64a36f968b825eaca1297cf8%2Ftiny-json-jacoco-coverage.json)
+
 
 Tiny JSON library for use in apps and games that are compiled with GraalVM Native Image. This library uses no reflection
 and is very small (20 kilobytes JAR file).
