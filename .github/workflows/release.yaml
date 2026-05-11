@@ -39,11 +39,14 @@ jobs:
 
       - name: Release
         run: |
+          GH_TOKEN="${{ secrets.GITHUB_TOKEN }}"
           if gh release view v${VERSION} > /dev/null 2>&1; then
             echo "Release v${VERSION} already exists. Skipping"
           else
             echo "Creating release: v${VERSION}"
-            echo "TODO"
+            ./gradlew publish
+            ./gradlew release
           fi
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -74,14 +74,43 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/tarmolehtpuu/tiny-json")
             credentials {
-                username = project.findProperty("gpr.username") as String? ?: System.getenv("GPR_USERNAME")
-                password = project.findProperty("gpr.password") as String? ?: System.getenv("GPR_PASSWORD")
+                username = project.findProperty("github.user") as String? ?: System.getenv("GITHUB_USER")
+                password = project.findProperty("github.token") as String? ?: System.getenv("GITHUB_TOKEN")
             }
         }
         publications {
             register<MavenPublication>("gpr") {
                 from(components["java"])
             }
+        }
+    }
+}
+
+tasks.register<Exec>("release") {
+    dependsOn(tasks.jar)
+
+    group = "publishing"
+    description = "Releases current version of tiny-json"
+    workingDir = file("build/libs")
+
+    val version = project.version.toString()
+
+    val token = project.findProperty("github.token") as String? ?: System.getenv("GITHUB_TOKEN")
+    if (token != null) {
+        environment("GH_TOKEN", token)
+    }
+
+    commandLine = listOf(
+        "gh", "release", "create", "v$version",
+        "--repo", "tarmolehtpuu/tiny-json",
+        "--title", "tiny-json-$version",
+        "--generate-notes",
+        "tiny-json-$version.jar"
+    )
+
+    doFirst {
+        if (token.isNullOrBlank()) {
+            throw GradleException("GITHUB_TOKEN not found in gradle.properties or ENV")
         }
     }
 }
