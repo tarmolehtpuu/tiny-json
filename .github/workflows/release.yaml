@@ -35,7 +35,7 @@ jobs:
 
       - name: Detect version
         run: |
-          echo "version=$(cat VERSION | xargs)" >> $GITHUB_ENV
+          echo "VERSION=$(cat VERSION | xargs)" >> $GITHUB_ENV
           echo "Detected version: v{$VERSION}"
 
       - name: Release
