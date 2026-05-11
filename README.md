@@ -37,7 +37,7 @@ Passes all tests from https://json.org/JSON_checker test suite.
     <dependency>
         <groupId>ee.moo</groupId>
         <artifactId>tiny-json</artifactId>
-        <version>0.0.3</version>
+        <version>0.0.4</version>
     </dependency>
 </dependencies>
 ```
@@ -58,7 +58,7 @@ repositories {
 }
 
 dependencies {
-    implementation("ee.moo:tiny-json:0.0.3")
+    implementation("ee.moo:tiny-json:0.0.4")
 }
 ```
 
