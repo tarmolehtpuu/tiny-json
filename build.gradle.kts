@@ -70,7 +70,7 @@ tasks.jar {
 
 publishing {
     repositories {
-        maven  {
+        maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/tarmolehtpuu/tiny-json")
             credentials {
