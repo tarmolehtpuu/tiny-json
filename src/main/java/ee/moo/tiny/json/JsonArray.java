@@ -89,19 +89,19 @@ public final class JsonArray extends JsonValue {
             if (cls == String.class) {
                 result.add((T) value.asString());
 
-            } else if (cls == Integer.class || cls == int.class) {
+            } else if (cls == Integer.class) {
                 result.add((T) Integer.valueOf(value.asInt()));
 
-            } else if (cls == Long.class || cls == long.class) {
+            } else if (cls == Long.class) {
                 result.add((T) Long.valueOf(value.asLong()));
 
-            } else if (cls == Float.class || cls == float.class) {
+            } else if (cls == Float.class) {
                 result.add((T) Float.valueOf(value.asFloat()));
 
-            } else if (cls == Double.class || cls == double.class) {
+            } else if (cls == Double.class) {
                 result.add((T) Double.valueOf(value.asDouble()));
 
-            } else if (cls == Boolean.class || cls == boolean.class) {
+            } else if (cls == Boolean.class) {
                 result.add((T) Boolean.valueOf(value.asBoolean()));
 
             } else if (JsonValue.class.isAssignableFrom(cls)) {

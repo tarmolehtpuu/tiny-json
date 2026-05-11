@@ -38,7 +38,7 @@ public enum JsonType {
     }
 
     public boolean isNumber() {
-        return this == JSON_NULL;
+        return this == JSON_NUMBER;
     }
 
     public boolean isObject() {
