@@ -49,6 +49,11 @@ public final class JsonString extends JsonValue {
     }
 
     @Override
+    public float asFloat() {
+        return Float.parseFloat(value);
+    }
+
+    @Override
     public double asDouble() {
         return Double.parseDouble(value);
     }
@@ -56,6 +61,11 @@ public final class JsonString extends JsonValue {
     @Override
     public int asInt() {
         return Integer.parseInt(value);
+    }
+
+    @Override
+    public long asLong() {
+        return Long.parseLong(value);
     }
 
     @Override

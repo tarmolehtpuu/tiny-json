@@ -18,9 +18,11 @@ package ee.moo.tiny.json;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public final class Json {
+
+    private Json() {
+    }
 
     public static String write(JsonValue value) {
         return String.format("%s\n", value.toJson());
@@ -38,20 +40,12 @@ public final class Json {
         return read(json).asObject();
     }
 
-    public static List<JsonValue> readArray(String json) {
-        return read(json).asList();
-    }
-
-    public static <T> List<T> readArray(String json, Class<T> cls) {
-        return read(json).asList(cls);
-    }
-
     public static JsonValue read(byte[] bytes) {
         if (bytes == null) {
             throw new JsonException("Can not parse null JSON bytes");
         }
 
-        return new JsonParser(new String(bytes, StandardCharsets.UTF_8)).parse();
+        return new JsonParser(new String(bytes, StandardCharsets.UTF_8).trim()).parse();
     }
 
     public static JsonObject readObject(byte[] bytes) {
@@ -85,7 +79,7 @@ public final class Json {
                 sb.append('\n');
             }
 
-            return read(sb.toString());
+            return read(sb.toString().trim());
 
         } catch (IOException e) {
             throw new JsonException("Failed to read JSON", e);

@@ -218,6 +218,6 @@ public final class JsonObject extends JsonValue {
 
     @Override
     public String toString() {
-        return values.toString();
+        return toJson();
     }
 }

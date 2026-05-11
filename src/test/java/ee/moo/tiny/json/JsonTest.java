@@ -18,7 +18,14 @@ package ee.moo.tiny.json;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.file.Files;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JsonTest {
 
@@ -123,5 +130,85 @@ public class JsonTest {
             """;
 
         assertEquals(json, Json.write(object4));
+    }
+
+    @Test
+    public void testRead() {
+        var json = """
+            {"message": "tere"}
+            """;
+
+        assertEquals("tere",
+            Json.read(json).asObject().get("message").asString());
+
+        assertThrows(JsonException.class, () -> {
+            String s = null;
+            Json.read(s);
+        });
+    }
+
+    @Test
+    public void testReadBytes() {
+        var json = """
+            {
+                "message": "Hi"
+            }
+            """.getBytes();
+
+        assertEquals("Hi",
+            Json.read(json).asObject().get("message").asString());
+
+        assertThrows(JsonException.class, () -> {
+            byte[] bytes = null;
+            Json.read(bytes);
+        });
+    }
+
+    @Test
+    public void testReadFile() throws IOException {
+        var path = Files.createTempFile("tiny-json", ".json");
+        Files.writeString(path, "[1, 2, 3]");
+
+        assertEquals(List.of(1, 2, 3), Json.read(path.toFile()).asList(Integer.class));
+
+        assertThrows(JsonException.class, () -> {
+            File file = null;
+            Json.read(file);
+        });
+    }
+
+    @Test
+    public void testReadStream() {
+        var reader = new StringReader("""
+            {"message": "HI!"}
+            """);
+
+        assertEquals("HI!",
+            Json.read(reader).asObject().get("message").asString());
+
+        assertThrows(JsonException.class, () -> {
+            StringReader r = null;
+            Json.read(r);
+        });
+    }
+
+    @Test
+    public void testReadObject() {
+        var json1 = """
+            {
+                "message": "Hello!"
+            }
+            """;
+        var json2 = """
+            {
+                "message": "World!"
+            }
+            """.getBytes();
+
+        assertEquals("Hello!", Json.readObject(json1)
+            .get("message").asString());
+        assertEquals("World!", Json.readObject(json2)
+            .get("message").asString());
+
     }
 }

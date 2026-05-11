@@ -21,14 +21,32 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.File;
+import java.io.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static ee.moo.tiny.json.TestHelper.resource;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class JsonOrgTest {
+
+    public static String resource(String path, Object... args) {
+        path = String.format(path, args);
+
+        try (var is = JsonOrgTest.class.getResourceAsStream(path)) {
+            if (is == null) {
+                throw new FileNotFoundException(String.format("Resource not found: %s", path));
+            }
+
+            try (var reader = new BufferedReader(new InputStreamReader(is, UTF_8))) {
+                return reader.lines().collect(Collectors.joining("\n"));
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
 
     public static Stream<TestPass> pass() {
         return Stream.of(
