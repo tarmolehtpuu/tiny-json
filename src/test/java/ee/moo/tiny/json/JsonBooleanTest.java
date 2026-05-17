@@ -35,11 +35,11 @@ public class JsonBooleanTest {
         assertEquals(JsonType.JSON_BOOLEAN, t.getType());
         assertEquals(JsonType.JSON_BOOLEAN, f.getType());
 
-        assertEquals("true", t.toJson());
-        assertEquals("true", t.toJson(2));
+        assertEquals("true", t.toJson(JsonWriteMode.PRETTY));
+        assertEquals("true", t.toJson(JsonWriteMode.PRETTY, 2));
 
-        assertEquals("false", f.toJson());
-        assertEquals("false", f.toJson(2));
+        assertEquals("false", f.toJson(JsonWriteMode.PRETTY));
+        assertEquals("false", f.toJson(JsonWriteMode.PRETTY, 2));
     }
 
     @Test

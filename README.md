@@ -100,7 +100,7 @@ UNIVERSE
 true
 ```
 
-### Write JSON
+### Write JSON (Pretty)
 
 ```java
 var object = new JsonObject();
@@ -125,4 +125,24 @@ System.out.println(Json.write(object));
   "size": 42,
   "seen": true
 }
+```
+
+
+### Write JSON (Normal)
+
+```java
+var object = new JsonObject();
+
+object.put("message", "Hello World!");
+object.put("targets", List.of("WORLD", "UNIVERSE"));
+object.put("size", 42);
+object.put("seen", true);
+
+System.out.println(Json.write(object));
+```
+
+#### Output
+
+```json
+{"message": "Hello World", "targets":  ["WORLD", "UNIVERSE"], "size": 42, "seen":  true}
 ```

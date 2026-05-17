@@ -29,9 +29,9 @@ public abstract sealed class JsonValue permits
 
     public abstract JsonType getType();
 
-    public abstract String toJson();
+    public abstract String toJson(JsonWriteMode mode);
 
-    public abstract String toJson(int indent);
+    public abstract String toJson(JsonWriteMode mode, int indent);
 
     public boolean isObject() {
         return getType().isObject();

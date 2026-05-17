@@ -34,13 +34,13 @@ public final class JsonNumber extends JsonValue {
     }
 
     @Override
-    public String toJson() {
+    public String toJson(JsonWriteMode mode) {
         return value;
     }
 
     @Override
-    public String toJson(int indent) {
-        return toJson();
+    public String toJson(JsonWriteMode mode, int indent) {
+        return value;
     }
 
     @Override

@@ -29,8 +29,8 @@ public class JsonNullTest {
         var n = JsonNull.INSTANCE;
 
         assertEquals(JsonType.JSON_NULL, n.getType());
-        assertEquals("null", n.toJson());
-        assertEquals("null", n.toJson(2));
+        assertEquals("null", n.toJson(JsonWriteMode.PRETTY));
+        assertEquals("null", n.toJson(JsonWriteMode.PRETTY, 2));
         assertNull(n.asNull());
     }
 

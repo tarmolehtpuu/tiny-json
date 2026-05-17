@@ -25,7 +25,11 @@ public final class Json {
     }
 
     public static String write(JsonValue value) {
-        return String.format("%s\n", value.toJson());
+        return write(value, JsonWriteMode.PRETTY);
+    }
+
+    public static String write(JsonValue value, JsonWriteMode mode) {
+        return value.toJson(mode);
     }
 
     public static JsonValue read(String json) {

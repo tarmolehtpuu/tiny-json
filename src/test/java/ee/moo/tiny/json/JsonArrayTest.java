@@ -37,20 +37,20 @@ public class JsonArrayTest {
         assertEquals(JsonType.JSON_ARRAY, a1.getType());
         assertEquals(JsonType.JSON_ARRAY, a2.getType());
 
-        assertEquals("[]", a1.toJson());
+        assertEquals("[]", a1.toJson(JsonWriteMode.PRETTY));
         assertEquals("""
             [
               "foo",
               "bar",
               "baz"
             ]
-            """.trim(), a2.toJson());
+            """.trim(), a2.toJson(JsonWriteMode.PRETTY));
     }
 
     @Test
     public void testNull() {
         var a = new JsonArray(null);
-        assertEquals("[]", a.toJson());
+        assertEquals("[]", a.toJson(JsonWriteMode.PRETTY));
     }
 
     @Test

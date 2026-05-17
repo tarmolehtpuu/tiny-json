@@ -28,8 +28,8 @@ public class JsonNumberTest {
 
         assertEquals("123", n.value());
         assertEquals(JsonType.JSON_NUMBER, n.getType());
-        assertEquals("123", n.toJson());
-        assertEquals("123", n.toJson(2));
+        assertEquals("123", n.toJson(JsonWriteMode.PRETTY));
+        assertEquals("123", n.toJson(JsonWriteMode.PRETTY));
         assertEquals(123, n.asInt());
         assertEquals(123L, n.asLong());
         assertEquals(123.0F, n.asFloat());

@@ -37,30 +37,40 @@ public final class JsonArray extends JsonValue {
     }
 
     @Override
-    public String toJson() {
-        return toJson(0);
+    public String toJson(JsonWriteMode mode) {
+        return toJson(mode, 0);
     }
 
     @Override
-    public String toJson(int indent) {
+    public String toJson(JsonWriteMode mode, int indent) {
         var sb = new StringBuilder();
-        var pad1 = "  ".repeat(indent);
-        var pad2 = "  ".repeat(indent + 1);
+
+        var pad1 = "";
+        var pad2 = "";
+        if (mode.isPretty()) {
+            pad1 = "  ".repeat(indent);
+            pad2 = "  ".repeat(indent + 1);
+        }
 
         sb.append('[');
 
         if (!values.isEmpty()) {
-            sb.append('\n');
+            if (mode.isPretty()) {
+                sb.append('\n');
+            }
 
             for (int i = 0; i < values.size(); i++) {
                 sb.append(pad2);
-                sb.append(values.get(i).toJson(indent + 1));
+                sb.append(values.get(i).toJson(mode, indent + 1));
 
                 if (i < values.size() - 1) {
                     sb.append(',');
                 }
 
-                sb.append('\n');
+                if (mode.isPretty()) {
+                    sb.append('\n');
+                }
+
             }
 
             sb.append(pad1);

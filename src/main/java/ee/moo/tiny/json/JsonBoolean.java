@@ -41,13 +41,15 @@ public final class JsonBoolean extends JsonValue {
     }
 
     @Override
-    public String toJson() {
-        return value ? "true" : "false";
+    public String toJson(JsonWriteMode mode) {
+        return Boolean.toString(value);
+
     }
 
     @Override
-    public String toJson(int indent) {
-        return toJson();
+    public String toJson(JsonWriteMode mode, int indent) {
+        return Boolean.toString(value);
+
     }
 
     @Override

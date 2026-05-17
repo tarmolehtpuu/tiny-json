@@ -31,22 +31,29 @@ public final class JsonObject extends JsonValue {
     }
 
     @Override
-    public String toJson() {
-        return toJson(0);
+    public String toJson(JsonWriteMode mode) {
+        return toJson(mode, 0);
     }
 
     @Override
-    public String toJson(int indent) {
+    public String toJson(JsonWriteMode mode, int indent) {
         var sb = new StringBuilder();
         var keys = new ArrayList<>(values.keySet());
 
-        String pad1 = "  ".repeat(indent);
-        String pad2 = "  ".repeat(indent + 1);
+        var pad1 = "";
+        var pad2 = "";
+
+        if (mode.isPretty()) {
+            pad1 = "  ".repeat(indent);
+            pad2 = "  ".repeat(indent + 1);
+        }
 
         sb.append('{');
 
         if (!keys.isEmpty()) {
-            sb.append('\n');
+            if (mode.isPretty()) {
+                sb.append('\n');
+            }
 
             for (int i = 0; i < keys.size(); i++) {
                 var key = keys.get(i);
@@ -58,14 +65,16 @@ public final class JsonObject extends JsonValue {
                 sb.append('"');
                 sb.append(':');
                 sb.append(' ');
-                sb.append(val.toJson(indent + 1));
-
+                sb.append(val.toJson(mode, indent + 1));
 
                 if (i < keys.size() - 1) {
                     sb.append(',');
                 }
 
-                sb.append('\n');
+                if (mode.isPretty()) {
+                    sb.append('\n');
+                }
+
             }
 
             sb.append(pad1);
@@ -218,6 +227,6 @@ public final class JsonObject extends JsonValue {
 
     @Override
     public String toString() {
-        return toJson();
+        return toJson(JsonWriteMode.PRETTY);
     }
 }

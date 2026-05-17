@@ -31,13 +31,13 @@ public final class JsonNull extends JsonValue {
     }
 
     @Override
-    public String toJson() {
+    public String toJson(JsonWriteMode mode) {
         return "null";
     }
 
     @Override
-    public String toJson(int indent) {
-        return toJson();
+    public String toJson(JsonWriteMode mode, int indent) {
+        return "null";
     }
 
     @Override

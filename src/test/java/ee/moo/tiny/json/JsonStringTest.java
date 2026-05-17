@@ -33,8 +33,8 @@ public class JsonStringTest {
 
         assertEquals("hello", s.value());
         assertEquals(JsonType.JSON_STRING, s.getType());
-        assertEquals("\"hello\"", s.toJson());
-        assertEquals("\"hello\"", s.toJson(2));
+        assertEquals("\"hello\"", s.toJson(JsonWriteMode.PRETTY));
+        assertEquals("\"hello\"", s.toJson(JsonWriteMode.PRETTY, 2));
         assertEquals("hello", s.asString());
     }
 

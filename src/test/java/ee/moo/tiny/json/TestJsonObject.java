@@ -52,8 +52,8 @@ public class TestJsonObject {
             }
             """.trim();
 
-        assertEquals("{}", o1.toJson());
-        assertEquals(json, o2.toJson());
+        assertEquals("{}", o1.toJson(JsonWriteMode.PRETTY));
+        assertEquals(json, o2.toJson(JsonWriteMode.PRETTY));
 
         assertTrue(o1.isEmpty());
         assertFalse(o2.isEmpty());

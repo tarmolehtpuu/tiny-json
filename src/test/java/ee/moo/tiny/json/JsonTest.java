@@ -42,7 +42,7 @@ public class JsonTest {
               "bar": 42,
               "baz": true
             }
-            """;
+            """.strip();
 
         assertEquals(json, Json.write(object));
     }
@@ -60,7 +60,7 @@ public class JsonTest {
               "bar",
               "baz"
             ]
-            """;
+            """.strip();
 
         assertEquals(json, Json.write(array));
     }
@@ -127,9 +127,37 @@ public class JsonTest {
                 }
               ]
             }
-            """;
+            """.strip();
 
         assertEquals(json, Json.write(object4));
+    }
+
+    @Test
+    public void testWriteModeNormal() {
+        var obj = new JsonObject();
+        obj.put("items", List.of("foo", "bar", "baz"));
+
+        var expected = """
+            {"items": ["foo","bar","baz"]}
+            """.strip();
+
+        assertEquals(expected, Json.write(obj, JsonWriteMode.NORMAL));
+    }
+
+    @Test
+    public void testWriteModeNormalReadme() {
+        var object = new JsonObject();
+
+        object.put("message", "Hello World!");
+        object.put("targets", List.of("WORLD", "UNIVERSE"));
+        object.put("size", 42);
+        object.put("seen", true);
+
+        var expected = """
+            {"message": "Hello World!","targets": ["WORLD","UNIVERSE"],"size": 42,"seen": true}
+            """.strip();
+
+        assertEquals(expected, Json.write(object, JsonWriteMode.NORMAL));
     }
 
     @Test
@@ -209,6 +237,5 @@ public class JsonTest {
             .get("message").asString());
         assertEquals("World!", Json.readObject(json2)
             .get("message").asString());
-
     }
 }
