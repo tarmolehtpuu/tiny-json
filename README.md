@@ -144,5 +144,5 @@ System.out.println(Json.write(object));
 #### Output
 
 ```json
-{"message": "Hello World", "targets":  ["WORLD", "UNIVERSE"], "size": 42, "seen":  true}
+{"message": "Hello World","targets": ["WORLD","UNIVERSE"],"size": 42,"seen": true}
 ```
