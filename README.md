@@ -10,26 +10,11 @@ Passes all tests from https://json.org/JSON_checker test suite.
 
 ### Maven
 
-#### ~/.m2/settings.xml
-```xml
-<settings>
-    <servers>
-        <server>
-            <id>github</id>
-            <username>GITHUB_USERNAME</username>
-            <password>GITHUB_TOKEN</password>
-        </server>
-    </servers>
-</settings>
-```
-
-#### pom.xml
-
 ```xml
 <repositories>
     <repository>
-        <id>github</id>
-        <url>https://maven.pkg.github.com/tarmolehtpuu/tiny-json</url>
+        <id>moo</id>
+        <url>https://repsy.io/moo/maven</url>
     </repository>
 </repositories>
 
@@ -48,12 +33,8 @@ Passes all tests from https://json.org/JSON_checker test suite.
 repositories {
     mavenCentral()
     maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/tarmolehtpuu/tiny-json")
-        credentials {
-            username = project.findProperty("github.user") as String? ?: System.getenv("GITHUB_USER")
-            password = project.findProperty("github.token") as String? ?: System.getenv("GITHUB_TOKEN")
-        }
+        name = "moo"
+        url = uri("https://repsy.io.moo/maven")
     }
 }
 
