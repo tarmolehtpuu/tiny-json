@@ -118,6 +118,7 @@ public final class JsonParser {
             }
         }
 
+        depth--;
         return obj;
     }
 
@@ -151,6 +152,8 @@ public final class JsonParser {
             }
         }
 
+
+        depth--;
         return array;
     }
 
