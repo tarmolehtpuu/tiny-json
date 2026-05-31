@@ -102,6 +102,18 @@ public final class JsonObject extends JsonValue {
         put(key, new JsonNumber(String.valueOf(value)));
     }
 
+    public void put(String key, long value) {
+        put(key, new JsonNumber(String.valueOf(value)));
+    }
+
+    public void put(String key, float value) {
+        put(key, new JsonNumber(String.valueOf(value)));
+    }
+
+    public void put(String key, double value) {
+        put(key, new JsonNumber(String.valueOf(value)));
+    }
+
     public void put(String key, boolean value) {
         put(key, JsonBoolean.of(value));
     }

@@ -99,8 +99,31 @@ public class TestJsonObject {
 
         assertEquals("tere",
             o3.getObject("object").asObject().get("message").asString());
+    }
 
+    @Test
+    public void testPutGet() {
+        var obj = new JsonObject();
 
+        obj.put("a", new JsonString("test"));
+        obj.put("b", "test");
+        obj.put("c", 1);
+        obj.put("d", 2L);
+        obj.put("e", 1.0f);
+        obj.put("f", 2.0d);
+        obj.put("g", true);
+        obj.put("h", Set.of("foo", "bar"));
+        obj.put("i", List.of("foo", "bar"));
+
+        assertEquals("test", obj.getString("a"));
+        assertEquals("test", obj.getString("b"));
+        assertEquals(1, obj.getInt("c"));
+        assertEquals(2, obj.getLong("d"));
+        assertEquals(1.0, obj.getFloat("e"));
+        assertEquals(2.0, obj.getDouble("f"));
+        assertTrue(obj.getBoolean("g"));
+        assertEquals(Set.of("foo", "bar"), obj.getSet("h", String.class));
+        assertEquals(List.of("foo", "bar"), obj.getList("i", String.class));
     }
 
     @Test
