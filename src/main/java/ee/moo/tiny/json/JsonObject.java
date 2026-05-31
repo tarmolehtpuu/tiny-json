@@ -143,6 +143,10 @@ public final class JsonObject extends JsonValue {
         put(key, data);
     }
 
+    public boolean contains(String key) {
+        return values.containsKey(key);
+    }
+
     public JsonValue get(String key) {
         return values.get(key);
     }

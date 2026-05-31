@@ -127,6 +127,18 @@ public class TestJsonObject {
     }
 
     @Test
+    public void testContains() {
+        var obj = new JsonObject();
+
+        obj.put("a", 1);
+        obj.put("b", 2);
+
+        assertTrue(obj.contains("a"));
+        assertTrue(obj.contains("b"));
+        assertFalse(obj.contains("c"));
+    }
+
+    @Test
     public void testEnum() {
         var o = new JsonObject();
         o.put("type1", Type.TYPE_1.toString());
